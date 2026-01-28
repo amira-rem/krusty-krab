@@ -1,0 +1,61 @@
+<% layout('layout') -%>
+
+<h1>Login 🔐</h1>
+<p class="muted">Login to get a JWT token stored in <code>localStorage</code>.</p>
+
+<div class="card">
+  <form id="loginForm" class="form">
+    <label>Email</label>
+    <input name="email" type="email" required placeholder="admin@kk.com" />
+    <label>Password</label>
+    <input name="password" type="password" required placeholder="123456" />
+    <button type="submit">Login</button>
+    <button type="button" id="registerBtn" class="secondary">Register</button>
+  </form>
+  <pre id="out" class="out"></pre>
+</div>
+
+<script>
+const out = document.getElementById('out');
+
+function show(obj) {
+  out.textContent = typeof obj === 'string' ? obj : JSON.stringify(obj, null, 2);
+}
+
+async function auth(endpoint, payload) {
+  const res = await fetch('/api/auth/' + endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type':'application/json' },
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json();
+  if (!res.ok) throw data;
+  return data;
+}
+
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const payload = Object.fromEntries(fd.entries());
+  try {
+    const data = await auth('login', payload);
+    localStorage.setItem('token', data.token);
+    show({ ok: true, message: 'Logged in. Token saved to localStorage.', token: data.token });
+  } catch (err) {
+    show(err);
+  }
+});
+
+document.getElementById('registerBtn').addEventListener('click', async () => {
+  const form = document.getElementById('loginForm');
+  const fd = new FormData(form);
+  const payload = Object.fromEntries(fd.entries());
+  try {
+    const data = await auth('register', payload);
+    localStorage.setItem('token', data.token);
+    show({ ok: true, message: 'Registered. Token saved to localStorage.', token: data.token });
+  } catch (err) {
+    show(err);
+  }
+});
+</script>

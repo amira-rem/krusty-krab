@@ -1,0 +1,50 @@
+<% layout('layout') -%>
+
+<h1>Menu 🍔</h1>
+<p class="muted">Loaded from <code>/api/recipes</code>.</p>
+
+<div id="menu" class="grid"></div>
+
+<script>
+async function loadMenu() {
+  const res = await fetch('/api/recipes');
+  const data = await res.json();
+
+  const el = document.getElementById('menu');
+  el.innerHTML = '';
+
+  if (!Array.isArray(data) || data.length === 0) {
+    el.innerHTML = '<p class="muted">No recipes found. (Try running: <code>npm run seed</code>)</p>';
+    return;
+  }
+
+  data.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const ingredients = Array.isArray(item.ingredients) && item.ingredients.length
+      ? '<div class="muted small">Ingredients: ' + item.ingredients.join(', ') + '</div>'
+      : '';
+
+    card.innerHTML = `
+      <div class="row">
+        <div>
+          <div class="title">${escapeHtml(item.name)}</div>
+          ${item.description ? `<div class="muted">${escapeHtml(item.description)}</div>` : ''}
+          ${ingredients}
+        </div>
+        <div class="price">$${Number(item.price).toFixed(2)}</div>
+      </div>
+    `;
+    el.appendChild(card);
+  });
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+
+loadMenu();
+</script>
