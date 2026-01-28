@@ -1,0 +1,77 @@
+[{
+  "_id": {
+    "$oid": "692ad6adecd8acc1970a87a2"
+  },
+  "name": "Spongebob Squarepants",
+  "role": "Cook"
+},
+{
+  "_id": {
+    "$oid": "692ad6adecd8acc1970a87a3"
+  },
+  "name": "Squidward Tentacles",
+  "role": "Cashier"
+},
+{
+  "_id": {
+    "$oid": "692ad6adecd8acc1970a87a4"
+  },
+  "name": "Mr. Krabs",
+  "role": "Manager"
+},
+{
+  "_id": {
+    "$oid": "692ad6b4ecd8acc1970a87a5"
+  },
+  "name": "Krabby Patty",
+  "price": 5.99
+},
+{
+  "_id": {
+    "$oid": "692ad6b4ecd8acc1970a87a6"
+  },
+  "name": "Chum Bucket Special",
+  "price": 4.99
+},
+{
+  "_id": {
+    "$oid": "692ad6b4ecd8acc1970a87a7"
+  },
+  "name": "Coral Bits",
+  "price": 2.49
+},
+{
+  "_id": {
+    "$oid": "692ad6b4ecd8acc1970a87a8"
+  },
+  "name": "Seaweed Salad",
+  "price": 3.99
+},
+{
+  "_id": {
+    "$oid": "692ad6b4ecd8acc1970a87a9"
+  },
+  "name": "Barnacle Soup",
+  "price": 4.49
+},
+{
+  "_id": {
+    "$oid": "692ad6b4ecd8acc1970a87aa"
+  },
+  "name": "Kelp Shake",
+  "price": 1.99
+},
+{
+  "_id": {
+    "$oid": "692ad6b4ecd8acc1970a87ab"
+  },
+  "name": "Jellyfish Jelly Sandwich",
+  "price": 3.49
+},
+{
+  "_id": {
+    "$oid": "692ad6b4ecd8acc1970a87ac"
+  },
+  "name": "Plankton Platter",
+  "price": 6.49
+}]

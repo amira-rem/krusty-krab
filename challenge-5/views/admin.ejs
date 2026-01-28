@@ -1,0 +1,43 @@
+<%- include('layout', { body: `
+  <h1>🧑‍🍳 Admin Menu CRUD (JWT via cookie)</h1>
+
+  <h3>Add item</h3>
+  <form id="add">
+    <input name="name" placeholder="name" required />
+    <input name="price" placeholder="price" type="number" step="0.01" required />
+    <button>Add</button>
+  </form>
+
+  <h3>Items</h3>
+  <ul id="list">
+    ${items.map(i => `
+      <li>
+        <b>${i.name}</b> — $${i.price}
+        <button onclick="del('${i._id}')">Delete</button>
+      </li>
+    `).join('')}
+  </ul>
+
+  <script>
+    document.getElementById('add').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const body = { name: fd.get('name'), price: Number(fd.get('price')) };
+      const r = await fetch('/api/menu', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(body)
+      });
+      const data = await r.json();
+      if (!r.ok) return alert(data.message || 'Error');
+      location.reload();
+    });
+
+    async function del(id){
+      const r = await fetch('/api/menu/' + id, { method: 'DELETE' });
+      const data = await r.json();
+      if (!r.ok) return alert(data.message || 'Error');
+      location.reload();
+    }
+  </script>
+` }) %>

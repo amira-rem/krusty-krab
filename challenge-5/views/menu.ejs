@@ -1,0 +1,6 @@
+<%- include('layout', { body: `
+  <h1>🍔 Krusty Krab Menu</h1>
+  <ul>
+    ${items.map(i => `<li>${i.name} — $${i.price}</li>`).join('')}
+  </ul>
+` }) %>
