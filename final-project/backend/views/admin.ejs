@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Admin Dashboard</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 30px; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { border-bottom: 1px solid #ddd; padding: 8px; text-align: left; }
+      .muted { color: #666; font-size: 12px; }
+      a { color: #0b57d0; }
+    </style>
+  </head>
+  <body>
+    <h2>Dashboard</h2>
+    <p class="muted">Logged in as <b><%= user.username %></b> (<%= user.role %>) â€” <a href="/admin/logout">logout</a></p>
+
+    <h3>Recipes</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Secret</th>
+          <th>Price</th>
+          <th>Created By</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% recipes.forEach(r => { %>
+          <tr>
+            <td><%= r.name %></td>
+            <td><%= r.isSecret ? "yes" : "no" %></td>
+            <td><%= r.price %></td>
+            <td><%= r.createdBy?.username || "unknown" %></td>
+            <td class="muted"><%= r.createdAt.toISOString().slice(0,10) %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <p class="muted" style="margin-top:14px;">
+      Dashboard simple (EJS). L'app React sert pour l'utilisation normale.
+    </p>
+  </body>
+</html>
